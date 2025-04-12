@@ -1,9 +1,10 @@
 
 <?php
- 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ServiceController;
  
 Route::get('/', function () {
     return view('welcome');
@@ -19,12 +20,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-/*** 
-Route::middleware('auth')->group(function () {
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
- ***///
+
   
     // Protect routes using authentication middleware
 Route::middleware(['auth'])->group(function () {
@@ -58,7 +54,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+   });
+
+   Route::controller(ServiceController::class)->prefix('services')->group(function () {
+    Route::get('', 'index')->name('services');
+    Route::get('create', 'create')->name('services.create');
+    Route::post('store', 'store')->name('services.store');
+    Route::get('show/{id}', 'show')->name('services.show');
+    Route::get('edit/{id}', 'edit')->name('services.edit');
+    Route::put('edit/{id}', 'update')->name('services.update');
+    Route::delete('destroy/{id}', 'destroy')->name('services.destroy');
 });
+
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('products');
@@ -71,3 +78,4 @@ Route::middleware(['auth'])->group(function () {
     });
  
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,74 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin 2 - Dashboard</title>
-  <!-- Custom fonts for this template-->
-  <link href="{{ asset('admin_assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  
-  <!-- Custom styles for this template-->
-  <link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <title>@yield('title') - Admin Panel</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+
+  <!-- AdminLTE Styles -->
+  <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+
 </head>
-<body id="page-top">
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
   
+    <!-- Navbar -->
+    @include('layouts.navbar')
     <!-- Sidebar -->
     @include('layouts.sidebar')
-    <!-- End of Sidebar -->
-  
+
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-  
-      <!-- Main Content -->
-      <div id="content">
-  
-        <!-- Topbar -->
-        @include('layouts.navbar')
-        <!-- End of Topbar -->
-  
-        <!-- Begin Page Content -->
+    <div class="content-wrapper">
+      <section class="content">
         <div class="container-fluid">
-  
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
-          </div>
-  
+          <h1 class="h3 mb-4">@yield('title')</h1>
           @yield('contents')
-  
-          <!-- Content Row -->
-  
-  
         </div>
-        <!-- /.container-fluid -->
-  
-      </div>
-      <!-- End of Main Content -->
-  
-      <!-- Footer -->
-      @include('layouts.footer')
-      <!-- End of Footer -->
-  
+      </section>
     </div>
-    <!-- End of Content Wrapper -->
-  
+
+    <!-- Footer -->
+    @include('layouts.footer')
+
   </div>
-  <!-- End of Page Wrapper -->
-  
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-  
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('admin_assets/vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
-  <!-- Page level plugins -->
-  <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
+
+  <!-- Required Scripts -->
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+  <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+
 </body>
 </html>

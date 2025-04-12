@@ -1,0 +1,8 @@
+INSERT INTO users (name, email, email_verified_at, password, remember_token, created_at, updated_at) 
+VALUES ('Admin', 'admin@example.com', NOW(), '$2b$12$Xkp/WLMjAEgrQtlMnybphOYU6LqShzQ9ETvzgZz2ur8hkDzvSBKGG', NULL, NOW(), NOW());
+
+
+
+
+admin: admin@example.com
+password: admin@123

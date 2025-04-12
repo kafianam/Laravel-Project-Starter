@@ -1,8 +1,11 @@
+@extends('adminlte::page')
 
-@extends('layouts.app')
+@section('title', 'Dashboard')
 
-@section('title', 'Admin Dashboard')
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
-@section('contents')
-    <h2>Welcome to Admin Dashboard</h2>
-@endsection
+@section('content')
+    <p>Welcome to this beautiful AdminLTE panel!</p>
+@stop

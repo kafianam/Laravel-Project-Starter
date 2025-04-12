@@ -6,3 +6,6 @@
 @section('contents')
     <h2>Welcome to Admin Dashboard</h2>
 @endsection
+
+
+
