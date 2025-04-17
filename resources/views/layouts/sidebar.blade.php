@@ -36,12 +36,12 @@
                     </a>
                 </li>
 
-        <li class="nav-item">
-          <a href="{{ route('products') }}" class="nav-link">
-            <i class="nav-icon fas fa-box"></i>
-            <p>Products</p>
-          </a>
-        </li>
+                <li class="nav-item">
+                    <a href="{{ url('visa_processing') }}" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>Visa Processing</p>
+                    </a>
+                </li>
 
         <li class="nav-item">
           <a href="/profile" class="nav-link">

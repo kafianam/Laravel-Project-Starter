@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\VisaProcessingFormController;
  
 Route::get('/', function () {
     return view('welcome');
@@ -65,6 +66,23 @@ Route::middleware(['auth'])->group(function () {
     Route::put('edit/{id}', 'update')->name('services.update');
     Route::delete('destroy/{id}', 'destroy')->name('services.destroy');
 });
+
+Route::get('/', function () {
+    return view('home');
+});
+
+
+Route::prefix('visa_processing')->group(function () {
+    Route::get('/', [VisaProcessingFormController::class, 'index'])->name('visa_processing.index');
+    Route::get('create', [VisaProcessingFormController::class, 'create'])->name('visa_processing.create');
+    Route::post('store', [VisaProcessingFormController::class, 'store'])->name('visa_processing.store');
+    Route::get('visa_processing/{id}', [VisaProcessingFormController::class, 'show'])->name('visa_processing.show');
+    Route::get('edit/{visaProcessingForm}', [VisaProcessingFormController::class, 'edit'])->name('visa_processing.edit');
+    Route::put('update/{visaProcessingForm}', [VisaProcessingFormController::class, 'update'])->name('visa_processing.update');
+    Route::delete('destroy/{visaProcessingForm}', [VisaProcessingFormController::class, 'destroy'])->name('visa_processing.destroy');
+});
+
+//Route::resource('visa_processing', App\Http\Controllers\Admin\VisaProcessingFormController::class);
 
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {

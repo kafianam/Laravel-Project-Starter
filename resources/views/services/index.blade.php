@@ -6,7 +6,7 @@
   
 @section('contents')
     <div class="d-flex align-items-center justify-content-between">
-        <h1 class="mb-0">List Srvices</h1>
+        <h1 class="mb-0">List Services</h1>
         <a href="{{ route('services.create') }}" class="btn btn-primary">Add Service</a>
     </div>
     <hr />
