@@ -1,6 +1,8 @@
 @extends('adminlte::page')
+
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
 @section('title', 'Visa Applications')
@@ -59,10 +61,41 @@
                         </td>
                         <td>
                             <a href="{{ route('visa_processing.show', $form->id) }}" class="btn btn-sm btn-primary">Details</a>
+                            <a href="{{ route('visa_processing.edit', $form->id) }}" class="btn btn-sm btn-primary">Edit</a>
+
+                            @if(auth()->user()->role === 'admin')
+                                <form action="{{ route('visa_processing.destroy', $form->id) }}" method="POST" class="delete-form d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <script>
+            document.querySelectorAll('.delete-form').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Are you sure to delete applicant permanently?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#e3342f',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
 @stop

@@ -79,7 +79,8 @@ Route::prefix('visa_processing')->group(function () {
     Route::get('visa_processing/{id}', [VisaProcessingFormController::class, 'show'])->name('visa_processing.show');
     Route::get('edit/{visaProcessingForm}', [VisaProcessingFormController::class, 'edit'])->name('visa_processing.edit');
     Route::put('update/{visaProcessingForm}', [VisaProcessingFormController::class, 'update'])->name('visa_processing.update');
-    Route::delete('destroy/{visaProcessingForm}', [VisaProcessingFormController::class, 'destroy'])->name('visa_processing.destroy');
+    Route::delete('visa-processing/{visaProcessingForm}', [VisaProcessingFormController::class, 'destroy'])->name('visa_processing.destroy');
+
 });
 
 //Route::resource('visa_processing', App\Http\Controllers\Admin\VisaProcessingFormController::class);
