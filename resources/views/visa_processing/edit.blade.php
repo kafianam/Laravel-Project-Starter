@@ -40,22 +40,7 @@
                 <div class="form-group"><label for="expected_travel_date">Expected Travel Date</label><input type="date" class="form-control" id="expected_travel_date" name="expected_travel_date" value="{{ $visaProcessingForm->expected_travel_date }}"></div>
                 <div class="form-group"><label for="primary_contact">Primary Contact</label><input type="text" class="form-control" id="primary_contact" name="primary_contact" value="{{ $visaProcessingForm->primary_contact }}"></div>
                 <div class="form-group"><label for="emergency_contact">Emergency Contact</label><input type="text" class="form-control" id="emergency_contact" name="emergency_contact" value="{{ $visaProcessingForm->emergency_contact }}"></div>
-                <div class="form-group"><label for="email">Email</label><input type="email" class="form-control" id="email" name="email" value="{{ $visaProcessingForm->email }}"></div>
-
-                @php
-                $advancePurchases = $visaProcessingForm->advance_purchase ?? [];
-
-                @endphp
-                <div class="form-group">
-                    <label>Advance Purchase</label><br>
-                    @foreach(['Ticket', 'Hotel', 'Insurance', 'Other'] as $item)
-                        <label class="mr-3">
-                            <input type="checkbox" name="advance_purchase[]" value="{{ $item }}" {{ in_array($item, $advancePurchases) ? 'checked' : '' }}>
-                            {{ $item }}
-                        </label>
-                    @endforeach
-                </div>
-
+              
                 <div class="form-group">
                     <label for="passport_copy">Passport Copy</label>
                     <input type="file" class="form-control" id="passport_copy" name="passport_copy">
@@ -89,22 +74,26 @@
                 </div>
 
                                 {{-- Advance Purchase --}}
-                @if(auth()->user()->role === 'admin')
-                    <div class="form-group">
-                        <label>Advance Purchase</label><br>
-                        @foreach(['Ticket', 'Hotel', 'Insurance', 'Other'] as $item)
-                            <label class="mr-3">
-                                <input
-                                    type="checkbox"
-                                    name="advance_purchase[]"
-                                    value="{{ $item }}"
-                                    {{ in_array($item, $visaProcessingForm->advance_purchase ?? []) ? 'checked' : '' }}
-                                >
-                                {{ $item }}
-                            </label>
-                        @endforeach
-                    </div>
-                @endif
+                                @php
+    $advancePurchaseOptions = ['Hotel Accommodation', 'Tickets & Transfer', 'Tour Packages'];
+@endphp
+
+<div class="form-group mt-4">
+    <label><strong>Advance Purchase <span class="text-danger">*</span></strong></label>
+    @foreach($advancePurchaseOptions as $item)
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="advance_purchase[]"
+                value="{{ $item }}"
+                {{ in_array($item, $advancePurchases ?? []) ? 'checked' : '' }}
+            >
+            <label class="form-check-label">{{ $item }}</label>
+        </div>
+    @endforeach
+</div>
+
 
 
                 {{-- Application Status --}}

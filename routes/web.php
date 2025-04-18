@@ -1,4 +1,3 @@
-
 <?php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -6,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\VisaProcessingFormController;
- 
+use App\Http\Controllers\PageController; 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -80,8 +81,14 @@ Route::prefix('visa_processing')->group(function () {
     Route::get('edit/{visaProcessingForm}', [VisaProcessingFormController::class, 'edit'])->name('visa_processing.edit');
     Route::put('update/{visaProcessingForm}', [VisaProcessingFormController::class, 'update'])->name('visa_processing.update');
     Route::delete('visa-processing/{visaProcessingForm}', [VisaProcessingFormController::class, 'destroy'])->name('visa_processing.destroy');
+    Route::get('visa-processing/download/{visaProcessingForm}', [VisaProcessingFormController::class, 'downloadPdf'])->name('visa_processing.download_pdf');
 
 });
+
+    Route::get('/about', [PageController::class, 'about']);
+    Route::get('/services', [PageController::class, 'services']);
+    Route::post('/booking', [PageController::class, 'storeBooking']);
+    Route::get('/contact', [PageController::class, 'contact']);
 
 //Route::resource('visa_processing', App\Http\Controllers\Admin\VisaProcessingFormController::class);
 

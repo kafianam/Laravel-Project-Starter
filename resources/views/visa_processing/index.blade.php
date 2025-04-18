@@ -60,14 +60,18 @@
                             Price: {{ $form->service->fee ?? '0' }} TK
                         </td>
                         <td>
-                            <a href="{{ route('visa_processing.show', $form->id) }}" class="btn btn-sm btn-primary">Details</a>
-                            <a href="{{ route('visa_processing.edit', $form->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ route('visa_processing.download_pdf', $form->id) }}" class="btn btn-sm btn-secondary" title="Download PDF" target="_blank">
+                            <i class="fas fa-file-download"></i>
+                            </a>
+
+                            <a href="{{ route('visa_processing.show', $form->id) }}" class="btn btn-sm btn-primary"> <i class="fas fa-eye"></i></a>
+                            <a href="{{ route('visa_processing.edit', $form->id) }}" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>
 
                             @if(auth()->user()->role === 'admin')
                                 <form action="{{ route('visa_processing.destroy', $form->id) }}" method="POST" class="delete-form d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"></i></button>
                                 </form>
                             @endif
                         </td>
