@@ -19,7 +19,11 @@
         <p><span class="label">Nationality:</span> {{ $visaProcessingForm->nationality }}</p>
         <p><span class="label">Travel From:</span> {{ $visaProcessingForm->travel_from }}</p>
         <p><span class="label">Travel Type:</span> {{ $visaProcessingForm->travel_type }}</p>
-        <p><span class="label">Expected Travel Date:</span> {{ $visaProcessingForm->expected_travel_date->format('Y-m-d') }}</p>
+        <p>
+    <span class="label">Expected Travel Date:</span>
+    {{ $visaProcessingForm->expected_travel_date ? $visaProcessingForm->expected_travel_date->format('Y-m-d') : 'N/A' }}
+</p>
+
     </div>
 
     <div class="section">
@@ -36,6 +40,8 @@
         <p><span class="label">Payment Status:</span> {{ $visaProcessingForm->payment_status }}</p>
         <p><span class="label">Payment Method:</span> {{ $visaProcessingForm->payment_method }}</p>
         <p><span class="label">Payment Date:</span> {{ optional($visaProcessingForm->payment_date)->format('Y-m-d') ?? 'N/A' }}</p>
+
+
 
     </div>
 
