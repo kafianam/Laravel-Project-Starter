@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\VisaProcessingFormController;
 use App\Http\Controllers\PageController; 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail; 
 
 
 Route::get('/', function () {
@@ -59,13 +61,13 @@ Route::middleware(['auth'])->group(function () {
    });
 
    Route::controller(ServiceController::class)->prefix('services')->group(function () {
-    Route::get('', 'index')->name('services');
+    Route::get('/', [ServiceController::class, 'index'])->name('services.index');
     Route::get('create', 'create')->name('services.create');
     Route::post('store', 'store')->name('services.store');
     Route::get('show/{id}', 'show')->name('services.show');
     Route::get('edit/{id}', 'edit')->name('services.edit');
     Route::put('edit/{id}', 'update')->name('services.update');
-    Route::delete('destroy/{id}', 'destroy')->name('services.destroy');
+    Route::delete('services/{services}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
 
 Route::get('/', function () {
@@ -86,12 +88,15 @@ Route::prefix('visa_processing')->group(function () {
 });
 
     Route::get('/about', [PageController::class, 'about']);
-    Route::get('/services', [PageController::class, 'services']);
+  //  Route::get('/service', [PageController::class, 'services']);
     Route::post('/booking', [PageController::class, 'storeBooking']);
     Route::get('/contact', [PageController::class, 'contact']);
 
-//Route::resource('visa_processing', App\Http\Controllers\Admin\VisaProcessingFormController::class);
-
+    Route::get('/test-mail', function () {
+        $user = App\Models\User::first();  // Or use a test user
+        Mail::to('test@example.com')->send(new TestMail($user));
+        return 'Test email sent.';
+    });
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('products');
@@ -103,5 +108,11 @@ Route::prefix('visa_processing')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
  
+    Route::get('/test-email', function () {
+        Mail::to('test@example.com')->send(new TestEmail());
+        return 'Test email sent.';
+    });
+
+
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

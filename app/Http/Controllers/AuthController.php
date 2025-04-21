@@ -1,12 +1,15 @@
 <?php
 namespace App\Http\Controllers;
-  
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Mail\CustomerRegisteredMail;
+use Illuminate\Support\Facades\Mail;
+
+
   
 class AuthController extends Controller
 {
@@ -24,13 +27,16 @@ class AuthController extends Controller
             'role' => 'required|in:customer,agent' // Validate role selection
         ])->validate();
   
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role
              //'level' => 'Admin'
         ]);
+
+        // Send user registered email
+        Mail::to($user->email)->send(new CustomerRegisteredMail($user));
   
         return redirect()->route('login');
     }

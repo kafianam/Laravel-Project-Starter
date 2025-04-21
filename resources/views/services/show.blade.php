@@ -1,32 +1,37 @@
+@extends('adminlte::page')
 
+@section('title', 'Service Details')
 
-@extends('layouts.app')
-  
-@section('title', 'Show Services')
-  
-@section('contents')
-    <h1 class="mb-0">Detail Service</h1>
-    <hr />
-    <div class="row">
-        <div class="col mb-3">
-            <label class="form-label">service</label>
-            <input type="text" name="service_name" class="form-control" placeholder="Service Name" value="{{ $service->service_name}}" readonly>
+@section('content_header')
+    <h1>Service Details</h1>
+@stop
+
+@section('content')
+    <div class="card p-4">
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label">Service Name</label>
+                <input type="text" class="form-control" value="{{ $service->service_name }}" readonly>
+            </div>
+            <div class="col">
+                <label class="form-label">Fee (Tk)</label>
+                <input type="text" class="form-control" value="{{ $service->fee }}" readonly>
+            </div>
         </div>
-        <div class="col mb-3">
-            <label class="form-label">Fee</label>
-            <input type="text" name="fee" class="form-control" placeholder="Fee" value="{{ $service->fee }}" readonly>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label">Created At</label>
+                <input type="text" class="form-control" value="{{ $service->created_at->format('Y-m-d H:i') }}" readonly>
+            </div>
+            <div class="col">
+                <label class="form-label">Updated At</label>
+                <input type="text" class="form-control" value="{{ $service->updated_at->format('Y-m-d H:i') }}" readonly>
+            </div>
+        </div>
+
+        <div class="text-end">
+            <a href="{{ route('services.index') }}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
-    
-    </div>
-    <div class="row">
-        <div class="col mb-3">
-            <label class="form-label">Created At</label>
-            <input type="text" name="created_at" class="form-control" placeholder="Created At" value="{{ $product->created_at }}" readonly>
-        </div>
-        <div class="col mb-3">
-            <label class="form-label">Updated At</label>
-            <input type="text" name="updated_at" class="form-control" placeholder="Updated At" value="{{ $product->updated_at }}" readonly>
-        </div>
-    </div>
-@endsection
+@stop
