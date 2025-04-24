@@ -10,6 +10,7 @@ class VisaProcessingForm extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'service_id',
         'name',
         'passport_number',
@@ -37,6 +38,16 @@ class VisaProcessingForm extends Model
         'payment_date' => 'date',
         'application_submit_date' => 'datetime',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($form) {
+            if (auth()->check()) {
+                $form->user_id = auth()->id();
+            }
+        });
+    }
+    
 
     public function service()
     {

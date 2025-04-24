@@ -14,9 +14,18 @@ class VisaProcessingFormController extends Controller
 {
     public function index()
     {
-        $forms = VisaProcessingForm::with('service')->latest()->get();
+        $user = auth()->user();
+    
+    
+        if ($user->role === 'admin') {
+            $forms = VisaProcessingForm::with('service')->latest()->get();
+        } else {
+            $forms = VisaProcessingForm::with('service')->where('user_id', $user->id)->latest()->get();
+        }
+    
         return view('visa_processing.index', compact('forms'));
     }
+    
 
     public function create()
     {
@@ -27,7 +36,10 @@ class VisaProcessingFormController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['passport_copy', 'ticket_copy', 'hotel_booking', 'other_doc']);
-    
+            
+            // Add logged-in user ID
+            $data['user_id'] = auth()->id();
+
         // Handle files
         if ($request->hasFile('passport_copy')) {
             $data['passport_copy'] = $request->file('passport_copy')->store('documents', 'public');

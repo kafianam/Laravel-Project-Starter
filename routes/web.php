@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\VisaProcessingFormController;
 use App\Http\Controllers\PageController; 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail; 
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -114,5 +114,6 @@ Route::prefix('visa_processing')->group(function () {
     });
 
 
-    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+  //  Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
