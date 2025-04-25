@@ -8,6 +8,9 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Mail\ApprovedStatusMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 
 class VisaProcessingFormController extends Controller
@@ -119,6 +122,7 @@ public function update(Request $request, $id)
 
     $validated = $request->validate($rules);
 
+    $previousStatus = $visaForm->application_status;
     // Fill form
     $visaForm->fill($validated);
 
@@ -132,13 +136,33 @@ public function update(Request $request, $id)
     // Admin-only updates
     if ($user->role === 'admin') {
         $visaForm->advance_purchase = $request->input('advance_purchase', []);
-        $visaForm->application_status = $request->input('application_status');
+       $visaForm->application_status = $request->input('application_status');
         $visaForm->payment_status = $request->input('payment_status');
         $visaForm->payment_method = $request->input('payment_method');
         $visaForm->payment_date = $request->input('payment_date');
     }
 
     $visaForm->save();
+
+//  Check if status changed to Approved
+if ($user->role === 'admin' && $visaForm->application_status === 'Approved' && $previousStatus !== 'Approved') {
+    Log::info("Application approved for ID: $id");
+
+    // Generate PDF
+    $pdf = Pdf::loadView('pdf.visa_approval', ['form' => $visaForm]);
+
+    $fileName = $visaForm->name . '_' . $visaForm->passport_number . '.pdf';
+    $filePath = storage_path('app/public/visa_pdfs/' . $fileName);
+
+    Storage::put('public/visa_pdfs/' . $fileName, $pdf->output());
+
+    // Send email
+    if ($visaForm->email) {
+        Mail::to($visaForm->email)->send(new ApprovedStatusMail($visaForm, $filePath));
+    }
+
+    Log::info("Approval email sent to " . $visaForm->email);
+}
 
     return redirect()->route('visa_processing.index')->with('success', 'Visa processing form updated successfully.');
 }
@@ -158,5 +182,7 @@ public function update(Request $request, $id)
         $pdf = Pdf::loadView('visa_processing.pdf', compact('visaProcessingForm'));
         return $pdf->download('visa_application_'.$visaProcessingForm->id.'.pdf');
     }
+
+   
 
 }

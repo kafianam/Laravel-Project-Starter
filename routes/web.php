@@ -84,6 +84,8 @@ Route::prefix('visa_processing')->group(function () {
     Route::put('update/{visaProcessingForm}', [VisaProcessingFormController::class, 'update'])->name('visa_processing.update');
     Route::delete('visa-processing/{visaProcessingForm}', [VisaProcessingFormController::class, 'destroy'])->name('visa_processing.destroy');
     Route::get('visa-processing/download/{visaProcessingForm}', [VisaProcessingFormController::class, 'downloadPdf'])->name('visa_processing.download_pdf');
+    //Route::post('/visa-approve/{id}', [VisaProcessingFormController::class, 'approve'])->name('visa.approve');
+    Route::get('/test-approve/{id}', [VisaProcessingFormController::class, 'approve']);
 
 });
 
@@ -108,10 +110,7 @@ Route::prefix('visa_processing')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
  
-    Route::get('/test-email', function () {
-        Mail::to('test@example.com')->send(new TestEmail());
-        return 'Test email sent.';
-    });
+   
 
 
   //  Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');

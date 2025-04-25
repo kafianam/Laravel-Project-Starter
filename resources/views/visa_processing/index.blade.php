@@ -63,6 +63,14 @@
                         <a href="{{ route('visa_processing.download_pdf', $form->id) }}" class="btn btn-sm btn-secondary" title="Download PDF" target="_blank">
                             <i class="fas fa-file-download"></i>
                             </a>
+                                @if($form->application_status === 'Approved')
+                                    @php
+                                        $pdfFileName = $form->name . '_' . $form->passport_number . '.pdf';
+                                        $pdfPath = asset('storage/visa_pdfs/' . $pdfFileName);
+                                    @endphp
+                                    <a href="{{ $pdfPath }}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-file-download"></i></a>
+                                @endif
+
 
                             <a href="{{ route('visa_processing.show', $form->id) }}" class="btn btn-sm btn-primary"> <i class="fas fa-eye"></i></a>
                             <a href="{{ route('visa_processing.edit', $form->id) }}" class="btn btn-sm btn-primary"> <i class="fas fa-edit"></i></a>
