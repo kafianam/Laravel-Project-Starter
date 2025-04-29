@@ -1,0 +1,22 @@
+
+.card {
+    background-color: #e5f26b !important;
+}
+
+label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff !important;
+}
+
+input[type="file"] {
+    background-color: #6c757d;
+    color: white;
+    padding: 6px;
+}
+
+.form-check-label {
+    margin-left: 5px;
+}
