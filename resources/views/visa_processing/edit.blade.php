@@ -6,7 +6,7 @@
 
 
 @section('content_header')
-    <h1>Edit Visa Processing Form</h1>
+    <h1>Edit LOI Processing Form</h1>
 @stop
 
 @php

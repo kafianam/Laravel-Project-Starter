@@ -7,7 +7,7 @@
 @section('title', 'Visa Processing Form Details')
 
 @section('content_header')
-    <h1>Visa Processing Form Details</h1>
+    <h1>LOI Processing Form Details</h1>
 @stop
 
 @section('content')

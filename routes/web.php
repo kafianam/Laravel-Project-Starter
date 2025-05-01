@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail; 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserManagementController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -70,6 +71,18 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('services/{services}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
 
+
+Route::controller(UserManagementController::class)->prefix('usermanagement')->group(function () {
+    Route::get('/', 'index')->name('usermanagement.index');
+    Route::get('create', 'create')->name('usermanagement.create');
+    Route::post('store', 'store')->name('usermanagement.store');
+    Route::get('show/{id}', 'show')->name('usermanagement.show');
+    Route::get('edit/{id}', 'edit')->name('usermanagement.edit');
+    Route::put('edit/{id}', 'update')->name('usermanagement.update');
+    Route::delete('{id}', 'destroy')->name('usermanagement.destroy');
+});
+
+
 Route::get('/', function () {
     return view('home');
 });
@@ -94,10 +107,12 @@ Route::prefix('visa_processing')->group(function () {
     Route::post('/booking', [PageController::class, 'storeBooking']);
     Route::get('/contact', [PageController::class, 'contact']);
 
-    Route::get('/test-mail', function () {
-        $user = App\Models\User::first();  // Or use a test user
-        Mail::to('test@example.com')->send(new TestMail($user));
-        return 'Test email sent.';
+    Route::get('/test-email', function () {
+        Mail::raw('This is a test email from Hostinger Laravel setup.', function ($msg) {
+            $msg->to('kafianam@gmail.com')->subject('Hostinger Mail Test');
+        });
+    
+        return 'Test email sent!';
     });
 
     Route::controller(ProductController::class)->prefix('products')->group(function () {
