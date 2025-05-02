@@ -26,14 +26,19 @@ class VisaProcessingForm extends Model
         'hotel_booking',
         'other_doc',
         'advance_purchase',
+        'guest_type',
+        'guest_count',
+        'relationship',
+        'itineraries',
         'application_status',
         'payment_status',
         'payment_method',
         'payment_date',
-    ];
+    ];    
 
     protected $casts = [
         'advance_purchase' => 'array',
+        'itineraries' => 'array',
         'expected_travel_date' => 'date',
         'payment_date' => 'date',
         'application_submit_date' => 'datetime',

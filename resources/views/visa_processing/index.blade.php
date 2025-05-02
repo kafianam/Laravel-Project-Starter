@@ -57,7 +57,7 @@
                         <td>{{ $form->payment_status }}</td>
                         <td>
                             {{ $form->service->service_name ?? 'N/A' }}<br>
-                            Price: {{ $form->service->fee ?? '0' }} TK
+                            Price: {{ $form->service->fee ?? '0' }} X {{ $form->guest_count ?? '1' }} ({{ isset($form->guest_count) ? number_format($form->service->fee * $form->guest_count, 2) : $form->service->fee }}) TK
                         </td>
                         <td>
                         <a href="{{ route('visa_processing.download_pdf', $form->id) }}" class="btn btn-sm btn-secondary" title="Download PDF" target="_blank">
