@@ -7,7 +7,7 @@
 @section('title', 'Applicant Details')
 
 @section('content_header')
-    <h1>Applicant Details</h1>
+    <h1>LOI Applicant Details</h1>
 @stop
 
 @section('content')

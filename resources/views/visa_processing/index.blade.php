@@ -8,15 +8,15 @@
 @section('title', 'Visa Applications')
 
 @section('content_header')
-    <h1>Visa Application List</h1>
+    <h1>Application List</h1>
 @stop
 
 @section('content')
     <div class="card p-3">
         <form method="GET" action="{{ route('visa_processing.index') }}" class="mb-3 d-flex justify-content-between">
             <div>
-                <a href="{{ route('visa_processing.create') }}" class="btn btn-primary">Visa Application Form</a>
-                <a href="#" class="btn btn-outline-secondary">LOI Request</a>
+                <a href="{{ route('visa_processing.create') }}" class="btn btn-primary">LOI Request</a>
+                <a href="#" class="btn btn-outline-secondary">Visa Application Form</a>
             </div>
             <div>
                 <button class="btn btn-success">Export To Excel</button>

@@ -339,6 +339,12 @@ return [
             'icon' => 'far fa-fw fa-file',
             'can'  => 'admin-only',
         ],
+        [
+            'text' => 'User Management',
+            'url' => 'usermanagement',
+            'icon' => 'far fa-fw fa-file',
+         
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
