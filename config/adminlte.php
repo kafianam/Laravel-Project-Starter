@@ -343,6 +343,7 @@ return [
             'text' => 'User Management',
             'url' => 'usermanagement',
             'icon' => 'far fa-fw fa-file',
+            'can'  => 'admin-only',
          
         ],
         ['header' => 'account_settings'],

@@ -80,8 +80,10 @@ Route::controller(UserManagementController::class)->prefix('usermanagement')->gr
     Route::get('edit/{id}', 'edit')->name('usermanagement.edit');
     Route::put('edit/{id}', 'update')->name('usermanagement.update');
     Route::delete('{id}', 'destroy')->name('usermanagement.destroy');
+
 });
 
+Route::get('/visa-processing/{id}/print', [VisaProcessingFormController::class, 'print'])->name('visa_processing.print');
 
 Route::get('/', function () {
     return view('home');

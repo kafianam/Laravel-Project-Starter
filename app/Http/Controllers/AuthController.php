@@ -62,13 +62,13 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         if (auth()->user()->isAgent()) {
-            return redirect()->route('agent.dashboard');
+            return redirect()->route('visa_processing.index');
         }
         
         if (auth()->user()->isCustomer()) {
-            return redirect()->route('customer.dashboard');
+            return redirect()->route('visa_processing.index');
         } else {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('visa_processing.index');
         }
         
     }

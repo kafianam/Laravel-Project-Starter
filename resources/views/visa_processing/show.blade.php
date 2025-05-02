@@ -61,6 +61,10 @@
             <p><strong>Payment Date:</strong> {{ $visaProcessingForm->payment_date }}</p>
 
             <a href="{{ route('visa_processing.index') }}" class="btn btn-secondary">Back to List</a>
+            <a href="{{ route('visa_processing.print', $visaProcessingForm->id) }}" target="_blank" class="btn btn-primary">
+    <i class="fas fa-print"></i> Print Voucher
+</a>
+
         </div>
     </div>
 @stop

@@ -160,6 +160,13 @@ class VisaProcessingFormController extends Controller
         return redirect()->route('visa_processing.index')->with('success', 'Form deleted successfully.');
     }
 
+    public function print($id)
+{
+    $visaProcessingForm = VisaProcessingForm::with('service')->findOrFail($id);
+    return view('visa_processing.print', compact('visaProcessingForm'));
+}
+
+
     public function downloadPdf(VisaProcessingForm $visaProcessingForm)
     {
         $pdf = Pdf::loadView('visa_processing.pdf', compact('visaProcessingForm'));
